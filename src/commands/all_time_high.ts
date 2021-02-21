@@ -12,8 +12,10 @@ const plugAllTimeHigh = async (assetKey: string) => {
     const { data: crypto }: ApiResponse<CryptoCurrency> = await httpClient.get(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,market_data,all_time_high`).json();
 
     const athTable = new Table({
+      title: `${crypto.name} All Time High`,
       columns: [
         { name: "name", title: "Name", alignment: "left" },
+        { name: "symbol", title: "Symbol", alignment: "left" },
         { name: "price_usd", title: "Price (USD)", alignment: "right" },
         { name: "price_btc", title: `Price (BTC/${crypto.symbol}`, alignment: "right" },
         { name: "price_eth", title: `Price (ETH/${crypto.symbol}`, alignment: "right" },
@@ -26,13 +28,14 @@ const plugAllTimeHigh = async (assetKey: string) => {
     athTable.addRows([
       {
         name: crypto.name,
+        symbol: crypto.symbol,
         price_usd: toCommaDelimitedDollarWithCentsString(crypto.market_data.price_usd),
         price_btc: toSatoshiPrecisionString(crypto.market_data.price_btc),
         price_eth: toSatoshiPrecisionString(crypto.market_data.price_eth),
-        all_time_high_usd: toCommaDelimitedDollarWithCentsString(crypto.all_time_high.price),
-        all_time_high_percent_delta: toPercentageString(crypto.all_time_high.percent_down),
-        all_time_high_days_since: crypto.all_time_high.days_since, // Not formatting on purpose because theres no need for a comma :)
-        all_time_high_date: crypto.all_time_high.at.toLocaleString()
+        all_time_high_usd: crypto.all_time_high.price ? toCommaDelimitedDollarWithCentsString(crypto.all_time_high.price) : "--",
+        all_time_high_percent_delta: crypto.all_time_high.percent_down ? toPercentageString(crypto.all_time_high.percent_down) : "--",
+        all_time_high_days_since: crypto.all_time_high.days_since ?? "--", // Not formatting on purpose because theres no need for a comma :)
+        all_time_high_date: crypto.all_time_high.at?.toLocaleString() ?? "--"
       }
     ]);
     athTable.printTable();

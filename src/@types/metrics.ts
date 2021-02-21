@@ -131,11 +131,11 @@ export interface Blockchain24HourStats {
 }
 
 export interface AllTimeHigh {
-  price: number; // 2019.043430460839,
-  at: Date; // '2021-02-20T04:00:00Z',
-  days_since: number; // 0,
-  percent_down: number; // -0,
-  breakeven_multiple: number; // 1
+  price: number | null; // 2019.043430460839,
+  at: Date | null; // '2021-02-20T04:00:00Z',
+  days_since: number | null; // 0,
+  percent_down: number | null; // -0,
+  breakeven_multiple: number | null; // 1
 }
 
 export interface TokenSaleStats {
