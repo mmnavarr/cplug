@@ -9,17 +9,16 @@ const plugBlockchain = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset metrics
     const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,blockchain_stats_24_hours,on_chain_data`);
-    console.log("🚀 ~ file: blockchain.ts ~ line 12 ~ plugBlockchain ~ crypto", crypto)
 
     const bc24HourStats = new Table({
-      title: `${crypto.name} Blockchain Data (24hr)`,
+      title: `${crypto.name} Blockchain Data (USD - 24hr)`,
       columns: [
         { name: "count_of_active_addresses", title: "Active Addresses", alignment: "right" }, // 629683
-        { name: "transaction_volume", title: "Tx Volume (USD)", alignment: "right" }, // 13193480582.455883
-        { name: "adjusted_transaction_volume", title: "Adj. Tx Volume (USD)", alignment: "right" }, // 9052216096.553448
-        { name: "adjusted_nvt", title: "Adj. NVT (USD)", alignment: "right" }, // 24.857006519211
-        { name: "median_tx_value", title: "Median Tx Value (USD)", alignment: "right" }, // 322.7089311996182
-        { name: "median_tx_fee", title: "Media Tx Fee (USD)", alignment: "right" }, // 11.79850264187507
+        { name: "transaction_volume", title: "Tx Volume", alignment: "right" }, // 13193480582.455883
+        { name: "adjusted_transaction_volume", title: "Adj. Tx Volume", alignment: "right" }, // 9052216096.553448
+        { name: "adjusted_nvt", title: "Adj. NVT", alignment: "right" }, // 24.857006519211
+        { name: "median_tx_value", title: "Median Tx Value", alignment: "right" }, // 322.7089311996182
+        { name: "median_tx_fee", title: "Media Tx Fee", alignment: "right" }, // 11.79850264187507
         { name: "count_of_tx", title: "# of Tx", alignment: "right" }, // 1323618
         { name: "new_issuance", title: "New Issuance", alignment: "right" }, // 26856350.218049396
         { name: "count_of_blocks_added", title: "Blocks", alignment: "right" }, // 6577
