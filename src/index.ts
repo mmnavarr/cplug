@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import nconf from "nconf";
-import yargs from "yargs";
+import { Command } from "commander";
 
 // Utils
 import { setApiKey } from "./utils/http_client";
@@ -25,21 +25,32 @@ nconf.save((error: Error) => {
   if (error) console.error(error);
 });
 
-const apiKey: string = nconf.get('apiKey');
+const apiKey: string = nconf.get("apiKey");
 
-const options = yargs
-  .usage("Usage: $ cplug <option> <asset_key>")
-  .option("init", { alias: "initialize", describe: "Messari API key", type: "string",  demandOption: !apiKey })
-  .option("a", { alias: "asset", describe: "Asset Key", type: "string" })
-  .option("md", { alias: "market_data", describe: "Asset Key", type: "string" })
-  // .option("me", { alias: "metrics", describe: "Asset Key", type: "string" })
-  .option("ath", { alias: "alltimehigh", describe: "Asset Key", type: "string" })
-  .option("lend", { alias: "lending", describe: "Asset Key", type: "string" })
-  .option("chain", { alias: "blockchain", describe: "Asset Key", type: "string" })
-  .option("roi", { describe: "Asset Key", type: "string" })
-  .option("dev", { alias: "developers", describe: "Asset Key", type: "string" })
-  .option("news", { describe: "Asset Key", type: "string" })
-  .argv;
+// New command instance to capture and parse cli
+const program = new Command();
+
+program
+  .description("Cryptocurrency market data at your fingertips.")
+  .option("-a --asset <ticker>", "Get asset profile")
+  .option("-md --market_data <ticker>", "Get asset market data")
+  // .option("me --metrics <ticker>", "Asset Key")
+  .option("-ath --alltimehigh <ticker>", "Get all time high data")
+  .option("-lend --lending <ticker>", "Get lender/borrower rates and general defi data")
+  .option("-chain --blockchain <ticker>", "Get information about the blockchain")
+  .option("-roi --roi <ticker>", "Get ROI numbers")
+  .option("-dev --developers <ticker>", "Get GitHub repository data")
+  .option("-news --news <ticker>", "Get current Messari news for asset")
+  .helpOption("-h, --help", "Display help for more commands");
+
+// If API Key is not set, make user initialize
+if (!apiKey) {
+  program.requiredOption("-i, --init <ticker>", "Enter Messari API Key")
+}
+
+// Parse & get cli command options
+program.parse();
+const options = program.opts();
 
 // Set API key in http client header and set is init flag to true
 if (options.init) {
@@ -47,13 +58,13 @@ if (options.init) {
 }
 
 // Get asset profile
-if (options.a) {
-  plugAssetProfile(options.a);
+if (options.asset) {
+  plugAssetProfile(options.asset);
 }
 
 // Get market data for asset
-if (options.md) {
-  plugMarketData(options.md);
+if (options.market_data) {
+  plugMarketData(options.market_data);
 }
 
 // TODO: Get metrics for asset
@@ -62,18 +73,18 @@ if (options.md) {
 // }
 
 // Get all time high data for asset
-if (options.ath) {
-  plugAllTimeHigh(options.ath);
+if (options.alltimehigh) {
+  plugAllTimeHigh(options.alltimehigh);
 }
 
 // Get lending & borrowing data for asset
-if (options.lend) {
-  plugLending(options.lend);
+if (options.lending) {
+  plugLending(options.lending);
 }
 
 // Get fee data for asset
-if (options.chain) {
-  plugBlockchain(options.chain);
+if (options.blockchain) {
+  plugBlockchain(options.blockchain);
 }
 
 // Get ROI data for asset
@@ -82,8 +93,8 @@ if (options.roi) {
 }
 
 // Get developer data for asset
-if (options.dev) {
-  plugDevelopers(options.dev);
+if (options.developers) {
+  plugDevelopers(options.developers);
 }
 
 // Get news for asset

@@ -116,18 +116,18 @@ export interface Supply {
 }
 
 export interface Blockchain24HourStats {
-  count_of_active_addresses: number; // 602485,
-  transaction_volume: number; // 15595011141.025295,
-  adjusted_transaction_volume: number; // 11088865618.798641,
-  adjusted_nvt: number; // 19.993159300452,
-  median_tx_value: number; // 384.79349358897764,
-  median_tx_fee: number; // 11.240837850189386,
-  count_of_tx: number; // 1298425,
-  count_of_payments: number; // 803485,
-  new_issuance: number; // 25981031.42359722,
-  average_difficulty: number; // 5059295587243820,
-  kilobytes_added: number; // 304343.211,
-  count_of_blocks_added: number; // 6447
+  count_of_active_addresses: number | null; // 602485,
+  transaction_volume: number | null; // 15595011141.025295,
+  adjusted_transaction_volume: number | null; // 11088865618.798641,
+  adjusted_nvt: number | null; // 19.993159300452,
+  median_tx_value: number | null; // 384.79349358897764,
+  median_tx_fee: number | null; // 11.240837850189386,
+  count_of_tx: number | null; // 1298425,
+  count_of_payments: number | null; // 803485,
+  new_issuance: number | null; // 25981031.42359722,
+  average_difficulty: number | null; // 5059295587243820,
+  kilobytes_added: number | null; // 304343.211,
+  count_of_blocks_added: number | null; // 6447
 }
 
 export interface AllTimeHigh {

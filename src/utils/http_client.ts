@@ -1,5 +1,5 @@
 import nconf from "nconf";
-import fs from "fs";
+// import fs from "fs";
 import got, { Got } from "got";
 
 import ora from "ora";
@@ -17,7 +17,6 @@ export const setApiKey = (apiKey: string): void => {
       "x-messari-api-key": apiKey
     }
   });
-  console.log("API Key set in header");
 
   nconf.argv().env().file({ file: "./config.json" });
 
@@ -25,10 +24,12 @@ export const setApiKey = (apiKey: string): void => {
   nconf.set("apiKey", apiKey);
 
   nconf.save((error: Error) => {
-    fs.readFile('./config.json', (_, data) => void console.dir(JSON.parse(data.toString())));
+    // fs.readFile('./config.json', (_, data) => void console.dir(JSON.parse(data.toString())));
 
     if (error) console.error(error);
   });
+
+  console.log(`API Key configured. ${chalk.green("Successful initialization")}.`);
 }
 
 interface UseHttpClientResponse<T> {

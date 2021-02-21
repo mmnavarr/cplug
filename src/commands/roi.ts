@@ -1,7 +1,6 @@
-import httpClient, { useHttpClient } from "../utils/http_client";
+import { useHttpClient } from "../utils/http_client";
 import { Table } from "console-table-printer";
 
-import { ApiResponse } from "../@types/types";
 import { CryptoCurrency } from "../@types/metrics";
 import { toCommaDelimitedString } from "../utils/format";
 
