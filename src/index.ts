@@ -43,9 +43,11 @@ program
   .option("-news --news <ticker>", "Get current Messari news for asset")
   .helpOption("-h, --help", "Display help for more commands");
 
-// If API Key is not set, make user initialize
+// If API Key is not set, make it a required option
 if (!apiKey) {
-  program.requiredOption("-i, --init <ticker>", "Enter Messari API Key")
+  program.requiredOption("-i, --init <api_key>", "Enter Messari API Key");
+} else {
+  program.option("-i, --init <api_key>", "Enter Messari API Key");
 }
 
 // Parse & get cli command options
