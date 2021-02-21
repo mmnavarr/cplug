@@ -1,8 +1,6 @@
-import httpClient from "../utils/http_client";
-import figlet from "figlet";
+import { useHttpClient } from "../utils/http_client";
 import { Table } from "console-table-printer";
 
-import { ApiResponse } from "../@types/types";
 import { CryptoCurrency } from "../@types/metrics";
 import { toCommaDelimitedDollarWithCentsString, toCommaDelimitedString, toPercentageString, toUppercaseFirstLetter } from "../utils/format";
 
@@ -10,7 +8,7 @@ import { toCommaDelimitedDollarWithCentsString, toCommaDelimitedString, toPercen
 const plugBlockchain = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset metrics
-    const { data: crypto }: ApiResponse<CryptoCurrency> = await httpClient.get(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,blockchain_stats_24_hours,on_chain_data`).json();
+    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,blockchain_stats_24_hours,on_chain_data`);
 
     const bc24HourStats = new Table({
       title: `${crypto.name} Blockchain Data (24hr)`,
@@ -43,7 +41,8 @@ const plugBlockchain = async (assetKey: string): Promise<void> => {
 
 
   } catch (error) {
-		console.error(error.response.body);
+		console.log("Please try again.");
+    // console.error(error.response.body);
 	}
 }
 

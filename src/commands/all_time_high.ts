@@ -1,4 +1,4 @@
-import httpClient from "../utils/http_client";
+import httpClient, { useHttpClient } from "../utils/http_client";
 import { Table } from "console-table-printer";
 
 import { ApiResponse } from "../@types/types";
@@ -9,7 +9,7 @@ import { toCommaDelimitedDollarWithCentsString, toPercentageString, toSatoshiPre
 const plugAllTimeHigh = async (assetKey: string) => {
   try {
     // Map API call to get asset metrics
-    const { data: crypto }: ApiResponse<CryptoCurrency> = await httpClient.get(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,market_data,all_time_high`).json();
+    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,market_data,all_time_high`);
 
     const athTable = new Table({
       title: `${crypto.name} All Time High`,
@@ -41,7 +41,8 @@ const plugAllTimeHigh = async (assetKey: string) => {
     athTable.printTable();
 
   } catch (error) {
-		console.error(error.response.body);
+    console.log("Please try again.");
+    // console.error(error.response.body);
 	}
 }
 

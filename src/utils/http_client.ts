@@ -2,6 +2,9 @@ import nconf from "nconf";
 import fs from "fs";
 import got, { Got } from "got";
 
+import ora from "ora";
+import { ApiResponse } from "../@types/types";
+import chalk from "chalk";
 
 const httpClient: Got = got.extend({
 	prefixUrl: "https://data.messari.io/api"
@@ -26,6 +29,33 @@ export const setApiKey = (apiKey: string): void => {
 
     if (error) console.error(error);
   });
+}
+
+interface UseHttpClientResponse<T> {
+  data: T;
+}
+
+export const useHttpClient = async <T>(url: string, loaderString: string = "Loading..."): Promise<UseHttpClientResponse<T>> => {
+  // Create spinner for API loading state
+  const spinner = ora(loaderString)
+  try {
+    spinner .start();
+
+    // Call API request
+    const { data }: ApiResponse<T> = await httpClient.get(url).json();
+
+    spinner.stop();
+
+    return { data };
+  } catch (error) {
+    spinner.stop();
+
+		console.error(chalk.red("Error fetching your data."));
+
+    throw Error("Error fetching your data.");
+	} finally {
+    spinner.stop();
+  }
 }
 
 export default httpClient;

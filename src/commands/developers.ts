@@ -1,4 +1,4 @@
-import httpClient from "../utils/http_client";
+import httpClient, { useHttpClient } from "../utils/http_client";
 import figures from "figures";
 import { Table } from "console-table-printer";
 
@@ -10,7 +10,7 @@ import { toCommaDelimitedString } from "../utils/format";
 const plugDevelopers = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset metrics
-    const { data: crypto }: ApiResponse<CryptoCurrency> = await httpClient.get(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,developer_activity`).json();
+    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,developer_activity`);
 
     const developerTable = new Table({
       title: `${crypto.name} GitHub Statistics`,
@@ -40,7 +40,8 @@ const plugDevelopers = async (assetKey: string): Promise<void> => {
     developerTable.printTable();
 
   } catch (error) {
-		console.error(error.response.body);
+		console.log("Please try again.");
+    // console.error(error.response.body);
 	}
 }
 

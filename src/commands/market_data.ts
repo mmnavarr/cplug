@@ -1,16 +1,15 @@
-import httpClient from "../utils/http_client";
+import { useHttpClient } from "../utils/http_client";
 import { Table } from "console-table-printer";
 import figures from "figures";
 
 import { toCommaDelimitedDollarWithCentsString, toPercentageString } from "../utils/format";
-import { ApiResponse } from "../@types/types";
 import { CryptoCurrency } from "../@types/metrics";
 
 
 const plugMarketData = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset market data
-    const { data: crypto }: ApiResponse<CryptoCurrency> = await httpClient.get(`v1/assets/${assetKey}/metrics/market-data`).json();
+    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics/market-data`);
 
     const md = new Table({
       title: `${crypto.name} Market Data`,
@@ -42,7 +41,8 @@ const plugMarketData = async (assetKey: string): Promise<void> => {
     md.printTable();
 
   } catch (error) {
-		console.error(error.response.body);
+		console.log("Please try again.");
+    // console.error(error.response.body);
 	}
 }
 

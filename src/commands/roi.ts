@@ -1,4 +1,4 @@
-import httpClient from "../utils/http_client";
+import httpClient, { useHttpClient } from "../utils/http_client";
 import { Table } from "console-table-printer";
 
 import { ApiResponse } from "../@types/types";
@@ -9,7 +9,7 @@ import { toCommaDelimitedString } from "../utils/format";
 const plugROI = async (assetKey: string) => {
   try {
     // Map API call to get asset market data
-    const { data: crypto }: ApiResponse<CryptoCurrency> = await httpClient.get(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,roi_data,roi_by_year`).json();
+    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,roi_data,roi_by_year`);
 
     const usdROI = new Table({
       title: `${crypto.name} RIO Data (USD)`,
@@ -91,7 +91,8 @@ const plugROI = async (assetKey: string) => {
     yearlyROI.printTable();
 
   } catch (error) {
-		console.error(error.response.body);
+    console.log("Please try again.");
+    // console.error(error.response.body);
 	}
 }
 

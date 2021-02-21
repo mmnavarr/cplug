@@ -1,8 +1,7 @@
-import httpClient from "../utils/http_client";
+import { useHttpClient } from "../utils/http_client";
 import figlet from "figlet";
 import { Table } from "console-table-printer";
 
-import { ApiResponse } from "../@types/types";
 import { CryptoCurrency } from "../@types/metrics";
 import { toCommaDelimitedDollarWithCentsString, toPercentageString, toUppercaseFirstLetter } from "../utils/format";
 import chalk from "chalk";
@@ -11,7 +10,7 @@ import chalk from "chalk";
 const plugLending = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset metrics
-    const { data: crypto }: ApiResponse<CryptoCurrency> = await httpClient.get(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,lend_rates,borrow_rates,loan_data`).json();
+    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,lend_rates,borrow_rates,loan_data`);
 
     // Display asset name
     console.log(figlet.textSync(crypto.name, { font: "Sub-Zero" }));
@@ -82,7 +81,8 @@ const plugLending = async (assetKey: string): Promise<void> => {
     loanData.printTable();
 
   } catch (error) {
-		console.error(error.response.body);
+		console.log("Please try again.");
+    // console.error(error.response.body);
 	}
 }
 

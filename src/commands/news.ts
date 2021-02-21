@@ -1,4 +1,4 @@
-import httpClient from "../utils/http_client";
+import httpClient, { useHttpClient } from "../utils/http_client";
 import prompts, { Choice, PromptObject } from "prompts";
 import marked from "marked";
 import TerminalRenderer from "marked-terminal";
@@ -7,14 +7,13 @@ import TerminalRenderer from "marked-terminal";
 marked.setOptions({ renderer: new TerminalRenderer() });
 
 // Types
-import { ApiResponse } from "../@types/types";
 import { NewsArticles } from "../@types/news";
 
 
 const plugNews = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset market data
-    const { data: newsArticles }: ApiResponse<NewsArticles> = await httpClient.get(`v1/news/${assetKey}?page=1&as-markdown`).json();
+    const { data: newsArticles } = await useHttpClient<NewsArticles>(`v1/news/${assetKey}?page=1&as-markdown`);
 
     // Console log markdown content of news via terminal renderer for clean syntax display
     const onSubmit = (_: PromptObject, answer: string) => console.log(marked(answer));
@@ -39,7 +38,8 @@ const plugNews = async (assetKey: string): Promise<void> => {
     await prompts(prompt, { onSubmit });
 
   } catch (error) {
-		console.error("Error: ", error.response.body);
+		console.log("Please try again.");
+    // console.error(error.response.body);
 	}
 }
 
