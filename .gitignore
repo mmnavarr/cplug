@@ -6,6 +6,9 @@
 # Internal config file (contains API key)
 config.json
 
+# Lib folder with transpiled code
+/lib
+
 # misc
 .DS_Store
 *.env*
