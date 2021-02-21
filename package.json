@@ -8,7 +8,10 @@
     "create": "npm run build && npm run test",
     "build": "tsc -p .",
     "local": "npm i -g && cplug",
-    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install"
+    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
+    "patch": "npm run build && npm version patch && npm publish",
+    "minor": "npm run build && npm version minor && npm publish",
+    "major": "npm run build && npm version major && npm publish"
   },
   "repository": {
     "type": "git",
