@@ -16,9 +16,7 @@ const plugLending = async (assetKey: string): Promise<void> => {
     console.log(figlet.textSync(crypto.name, { font: "Sub-Zero" }));
 
     // Define lend rates table and iterate through response to populate table if applicable
-    const existLendRates: boolean = (Array.isArray(crypto.lend_rates) && crypto.lend_rates.length > 0);
-
-    if (existLendRates) {
+    if (crypto.lend_rates !== null) {
       const lendRates = new Table({
         title: "Lend Rates",
         columns: [
@@ -38,9 +36,7 @@ const plugLending = async (assetKey: string): Promise<void> => {
     }
 
     // Define borrow rates table and iterate through response to populate table if applicable
-    const existBorrowRates: boolean = (Array.isArray(crypto.borrow_rates) && crypto.borrow_rates.length > 0);
-
-    if (existBorrowRates) {
+    if (crypto.borrow_rates !== null) {
       const borrowRates = new Table({
         title: "Borrow Rates",
         columns: [
