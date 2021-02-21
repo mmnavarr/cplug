@@ -1,0 +1,14 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Dependencies
+/node_modules
+
+# Internal config file (contains API key)
+config.json
+
+# misc
+.DS_Store
+*.env*
+*.env-local
+npm-debug.log*
+.vscode
