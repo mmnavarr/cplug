@@ -1,6 +1,6 @@
 {
   "name": "cplug",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Crypto Plug is a CLI tool for getting cryptocurrency market data, news, and more!",
   "main": "lib/index.js",
   "scripts": {
