@@ -1,8 +1,7 @@
 import httpClient from "../utils/http_client";
-import prettyjson from "prettyjson";
 import figlet from "figlet";
 import chalk from "chalk";
-import { printTable, Table } from "console-table-printer";
+import { Table } from "console-table-printer";
 import cliHtml from "cli-html";
 
 // Types

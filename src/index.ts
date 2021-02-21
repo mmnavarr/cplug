@@ -1,7 +1,5 @@
 #!/usr/bin/env node
-// Message API Key: 9915e93a-6993-41f3-b241-bafe16beea47
 import nconf from "nconf";
-import fs from "fs";
 import yargs from "yargs";
 
 // Utils
@@ -10,7 +8,7 @@ import { setApiKey } from "./utils/http_client";
 // Commands
 import plugMarketData from "./commands/market_data";
 import plugAssetProfile from "./commands/asset_profile";
-import plugMetrics from "./commands/metrics";
+// import plugMetrics from "./commands/metrics";
 import plugAllTimeHigh from "./commands/all_time_high";
 import plugLending from "./commands/lending";
 import plugDevelopers from "./commands/developers";
@@ -24,8 +22,6 @@ nconf.argv().env().file({ file: "./config.json" });
 nconf.defaults({ "apiKey": null });
 
 nconf.save((error: Error) => {
-  // fs.readFile('./config.json', (_, data) => void console.dir(JSON.parse(data.toString())));
-
   if (error) console.error(error);
 });
 

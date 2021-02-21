@@ -37,11 +37,8 @@
     "cplug": "lib/index.js"
   },
   "dependencies": {
-    "boxen": "^5.0.0",
     "chalk": "^4.1.0",
-    "clear": "^0.1.0",
     "cli-html": "^1.8.4",
-    "commander": "^7.1.0",
     "console-table-printer": "^2.7.5",
     "figlet": "^1.5.0",
     "figures": "^3.2.0",
@@ -52,7 +49,6 @@
     "nconf": "^0.11.2",
     "numeral": "^2.0.6",
     "path": "^0.12.7",
-    "prettyjson": "^1.2.1",
     "prompts": "^2.4.0",
     "yargs": "^16.2.0"
   },
@@ -65,7 +61,6 @@
     "@types/node": "^14.14.31",
     "@types/node-emoji": "^1.8.1",
     "@types/numeral": "^2.0.0",
-    "@types/prettyjson": "0.0.29",
     "@types/prompts": "^2.0.9",
     "@types/yargs": "^16.0.0",
     "nodemon": "^2.0.7",

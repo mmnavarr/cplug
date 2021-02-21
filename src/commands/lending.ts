@@ -12,7 +12,6 @@ const plugLending = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset metrics
     const { data: crypto }: ApiResponse<CryptoCurrency> = await httpClient.get(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,lend_rates,borrow_rates,loan_data`).json();
-    console.log("🚀 ~ file: lending.ts ~ line 14 ~ plugLending ~ crypto", crypto)
 
     // Display asset name
     console.log(figlet.textSync(crypto.name, { font: "Sub-Zero" }));
