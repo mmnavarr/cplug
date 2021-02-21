@@ -1,0 +1,12 @@
+# These items will be ignored when creating package
+package-lock.json
+.eslintignore
+.eslintrc.js
+__tests__
+jest.config.js
+.babelrc.js
+src
+.gitignore
+.DS_Store
+.vscode
+config.json
