@@ -5,7 +5,7 @@
 ### How to Install
 You need to install [Node.js](https://nodejs.org/en/download/) first, then install the tool globally using npm via this command:
 ```zsh
-$ npm install -g cplug
+$ npm install -g cplug@1.0.8
 ```
 This will install `cplug` globally, so it will be added automatically to your PATH.
 
