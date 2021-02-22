@@ -14,7 +14,7 @@ In order to enable the market data cli commands, `cplug` must be initialized usi
 ```zsh
 $ npm --init <api_key>
 ```
-![](./img/init.gif)
+![](./img/init.png)
 ### Create Messari API Key
 It takes 1 minute to create a Messari API key by doing the following:
 1. Navigate to [messari.io](https://messari.io/)
@@ -52,22 +52,22 @@ Try them for yourself.
 
 ### Examples
 Get asset profile `-a --asset`
-![](./img/asset_profile.gif)
+![](./img/asset_profile.png)
 
 Get current Messari news for asset
-![](./img/news.gif)
+![](./img/news.png)
 
 Get asset market data `-md --market_data`
-![](./img/market_data.gif)
+![](./img/market_data.png)
 
 Get all time high data `-ath --all_time_high`
-![](./img/all_time_high.gif)
+![](./img/all_time_high.png)
 
 Get lender/borrower rates and general lending data `-lend --lending`
-![](./img/lending.gif)
+![](./img/lending.png)
 
 Get information about the blockchain `-chain --blockchain`
-![](./img/lending.gif)
+![](./img/blockchain.png)
 
 ### What's Next?
 - [ ] Add up and down arrows to +/- columns to indicate movement direction
