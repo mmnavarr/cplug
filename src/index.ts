@@ -15,6 +15,7 @@ import plugDevelopers from "./commands/developers";
 import plugNews from "./commands/news";
 import plugROI from "./commands/roi";
 import plugBlockchain from "./commands/blockchain";
+import plugSatoshi from "./commands/satoshi";
 
 
 // Initialize nconf for local storage
@@ -41,6 +42,7 @@ program
   .option("-roi --roi <ticker>", "Get ROI numbers")
   .option("-dev --developers <ticker>", "Get GitHub repository data")
   .option("-news --news <ticker>", "Get current Messari news for asset")
+  .option("-sat --satoshi", "Get satoshi's net worth")
   .helpOption("-h, --help", "Display help for more commands");
 
 // If API Key is not set, make it a required option
@@ -107,6 +109,11 @@ if (options.developers) {
 // Get news for asset
 if (options.news) {
   plugNews(options.news);
+}
+
+// Get satoshi's net worth
+if (options.satoshi) {
+  plugSatoshi();
 }
 
 // TODO: Add yield for staking_stats, mining_stats, lending too?
