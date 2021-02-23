@@ -69,6 +69,9 @@ Get lender/borrower rates and general lending data `-lend --lending`
 Get information about the blockchain `-chain --blockchain`
 ![](./img/blockchain.png)
 
+Get satoshi's net worth `-sat --satoshi`
+![](./img/satoshi.png)
+
 ### What's Next?
 - [ ] Add up and down arrows to +/- columns to indicate movement direction
 - [ ] `--lending` Display lending/borrowing tables next to each other
