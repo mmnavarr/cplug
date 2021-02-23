@@ -1,4 +1,4 @@
-import httpClient, { useHttpClient } from "../utils/http_client";
+import { useHttpClient } from "../utils/http_client";
 import prompts, { Choice, PromptObject } from "prompts";
 import marked from "marked";
 import TerminalRenderer from "marked-terminal";
@@ -10,14 +10,17 @@ marked.setOptions({ renderer: new TerminalRenderer() });
 import { NewsArticles } from "../@types/news";
 
 
-const plugNews = async (assetKey: string): Promise<void> => {
+const plugNews = async (assetKey: string | boolean): Promise<void> => {
   try {
+    /// If asset key is true then command was called without a asset key argument
+    const defaultNews: boolean = assetKey === true;
+    const newsApiUrl: string = "v1/news" + (defaultNews ? "" : `/${assetKey}`) + "?page=1&as-markdown";
+
     // Map API call to get asset market data
-    const { data: newsArticles } = await useHttpClient<NewsArticles>(`v1/news/${assetKey}?page=1&as-markdown`);
+    const { data: newsArticles } = await useHttpClient<NewsArticles>(newsApiUrl);
 
     // Console log markdown content of news via terminal renderer for clean syntax display
     const onSubmit = (_: PromptObject, answer: string) => console.log(marked(answer));
-    // TODO: Is there a better way to render the markdown content?
 
     // Construct choices by mapping through articles
     const newsChoices: Choice[] = newsArticles.map((n, i) => ({

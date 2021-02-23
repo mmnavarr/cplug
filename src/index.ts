@@ -41,7 +41,7 @@ program
   .option("-chain --blockchain <ticker>", "Get information about the blockchain")
   .option("-roi --roi <ticker>", "Get ROI numbers")
   .option("-dev --developers <ticker>", "Get GitHub repository data")
-  .option("-news --news <ticker>", "Get current Messari news for asset")
+  .option("-news --news [ticker]", "Get current Messari news (ticker optional)")
   .option("-sat --satoshi", "Get satoshi's net worth")
   .helpOption("-h, --help", "Display help for more commands");
 
