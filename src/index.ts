@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import nconf from "nconf";
-import { Command } from "commander";
+import { Command, OptionValues } from "commander";
 
 // Utils
 import { setApiKey } from "./utils/http_client";
@@ -51,8 +51,13 @@ if (!apiKey) {
 }
 
 // Parse & get cli command options
-program.parse();
-const options = program.opts();
+const options: OptionValues = program.parse().opts();
+
+// Check the options object to see if commands are being used
+var hasCommand: boolean = Object.keys(options).length !== 0;
+
+// Display help if no command was provided
+if (!hasCommand) program.help();
 
 // Set API key in http client header and set is init flag to true
 if (options.init) {
