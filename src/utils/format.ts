@@ -8,4 +8,6 @@ export const toPercentageString = (number: number | null, nullState: string = "-
 
 export const toSatoshiPrecisionString = (number: number | null, nullState: string = "--"): string => number != null ? numeral(number).format("0,0.00000000") : nullState;
 
+export const toDecimalLetterString = (number: number | null, nullState: string = "--"): string => number != null ? numeral(number).format("$0.00a") : nullState;
+
 export const toUppercaseFirstLetter = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
