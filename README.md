@@ -12,7 +12,7 @@ This will install `cplug` globally, so it will be added automatically to your PA
 ### How to Initialize
 In order to enable the market data cli commands, `cplug` must be initialized using a Messari API Key. Run the following:
 ```zsh
-$ npm --init <api_key>
+$ cplug --init <api_key>
 ```
 ![](./img/init.png)
 ### Create Messari API Key
