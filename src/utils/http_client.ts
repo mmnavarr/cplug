@@ -32,31 +32,49 @@ export const setApiKey = (apiKey: string): void => {
   console.log(`API Key configured. ${chalk.green("Successful initialization")}.`);
 }
 
-interface UseHttpClientResponse<T> {
-  data: T;
-}
-
-export const useHttpClient = async <T>(url: string, loaderString: string = "Loading..."): Promise<UseHttpClientResponse<T>> => {
+export const makeHttpCall = async <T>(url: string, loaderString: string = "Loading..."): Promise<ApiResponse<T>> => {
   // Create spinner for API loading state
-  const spinner = ora(loaderString)
+  const spinner = ora(loaderString);
+
   try {
-    spinner .start();
+    spinner.start();
 
     // Call API request
-    const { data }: ApiResponse<T> = await httpClient.get(url).json();
+    const response: ApiResponse<T> = await httpClient.get(url).json();
 
     spinner.stop();
 
-    return { data };
+    return response;
   } catch (error) {
     spinner.stop();
 
 		console.error(chalk.red("Error fetching your data."));
 
     throw Error("Error fetching your data.");
-	} finally {
+	}
+}
+
+// TODO: Make T a variadic tuple? How to make generic T | U | K etc of dynamic length
+export const makeHttpCalls = async <T>(urls: string[], loaderString: string = "Loading..."): Promise<ApiResponse<T>[]> => {
+  // Create spinner for API loading state
+  const spinner = ora(loaderString);
+
+  try {
+    spinner.start();
+
+    // Call API request
+    const response: ApiResponse<T>[] = await Promise.all<ApiResponse<T>>(urls.map((url) => httpClient.get(url).json()));
+
     spinner.stop();
-  }
+
+    return response;
+  } catch (error) {
+    spinner.stop();
+
+		console.error(chalk.red("Error fetching your data."));
+
+    throw Error("Error fetching your data.");
+	}
 }
 
 export default httpClient;
