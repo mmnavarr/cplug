@@ -34,9 +34,9 @@ const program = new Command();
 program
   .description("Cryptocurrency market data at your fingertips.")
   .option("-a --asset <ticker>", "Get asset profile")
-  .option("-md --market_data <ticker>", "Get asset market data")
+  .option("-md --market_data <ticker...>", "Get asset(s) market data")
   // .option("me --metrics <ticker>", "Asset Key")
-  .option("-ath --alltimehigh <ticker>", "Get all time high data")
+  .option("-ath --all_time_high <ticker...>", "Get asset(s) all time high data")
   .option("-lend --lending <ticker>", "Get lender/borrower rates and general defi data")
   .option("-chain --blockchain <ticker>", "Get information about the blockchain")
   .option("-roi --roi <ticker>", "Get ROI numbers")
@@ -55,10 +55,8 @@ if (!apiKey) {
 // Parse & get cli command options
 const options: OptionValues = program.parse().opts();
 
-// Check the options object to see if commands are being used
+// Check the options object to create flag if commands are being used, otherwise show help
 var hasCommand: boolean = Object.keys(options).length !== 0;
-
-// Display help if no command was provided
 if (!hasCommand) program.help();
 
 // Set API key in http client header and set is init flag to true
@@ -82,8 +80,8 @@ if (options.market_data) {
 // }
 
 // Get all time high data for asset
-if (options.alltimehigh) {
-  plugAllTimeHigh(options.alltimehigh);
+if (options.all_time_high) {
+  plugAllTimeHigh(options.all_time_high);
 }
 
 // Get lending & borrowing data for asset
@@ -115,5 +113,3 @@ if (options.news) {
 if (options.satoshi) {
   plugSatoshi();
 }
-
-// TODO: Add yield for staking_stats, mining_stats, lending too?
