@@ -36,16 +36,17 @@ Usage: cplug [options]
 Cryptocurrency market data at your fingertips.
 
 Options:
-  -a --asset <ticker>           Get asset profile
-  -md --market_data <ticker>    Get asset market data
-  -ath --all_time_high <ticker>   Get all time high data
-  -lend --lending <ticker>      Get lender/borrower rates and general lending data
-  -chain --blockchain <ticker>  Get information about the blockchain
-  -roi --roi <ticker>           Get ROI numbers
-  -dev --developers <ticker>    Get GitHub repository data
-  -news --news <ticker>         Get current Messari news for asset
-  -i, --init <api_key>          Enter Messari API Key
-  -h, --help                    Display help for more commands
+  -a --asset <ticker>               Get asset profile
+  -md --market_data <ticker...>     Get asset(s) market data
+  -ath --all_time_high <ticker...>  Get asset(s) all time high data
+  -lend --lending <ticker>          Get lender/borrower rates and general defi data
+  -chain --blockchain <ticker>      Get information about the blockchain
+  -roi --roi <ticker>               Get ROI numbers
+  -dev --developers <ticker>        Get GitHub repository data
+  -news --news [ticker]             Get current Messari news (ticker optional)
+  -sat --satoshi                    Get satoshi's net worth
+  -i, --init <api_key>              Enter Messari API Key
+  -h, --help                        Display help for more commands
 ```
 
 Try them for yourself.
