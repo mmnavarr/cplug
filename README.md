@@ -54,7 +54,7 @@ Try them for yourself.
 Get asset profile `-a --asset`
 ![](./img/asset_profile.png)
 
-Get current Messari news for asset
+Get current Messari news for asset `-news --news`
 ![](./img/news.png)
 
 Get asset market data `-md --market_data`
