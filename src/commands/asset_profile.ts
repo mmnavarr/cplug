@@ -1,4 +1,4 @@
-import { useHttpClient } from "../utils/http_client";
+import { makeHttpCall } from "../utils/http_client";
 import figlet from "figlet";
 import chalk from "chalk";
 import { Table } from "console-table-printer";
@@ -12,7 +12,7 @@ const plugAssetProfile = async (assetKey: string): Promise<void> => {
   try {
 
     // Map API call to get asset profile
-    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v2/assets/${assetKey}/profile`, "Loading Asset Profile...");
+    const { data: crypto } = await makeHttpCall<CryptoCurrency>(`v2/assets/${assetKey}/profile`, "Loading Asset Profile...");
 
     // Bitcoin general information
     console.log(figlet.textSync(crypto.name, { font: "Ghost" }));

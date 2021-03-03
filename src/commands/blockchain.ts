@@ -1,4 +1,4 @@
-import { useHttpClient } from "../utils/http_client";
+import { makeHttpCall } from "../utils/http_client";
 import { Table } from "console-table-printer";
 
 import { CryptoCurrency } from "../@types/metrics";
@@ -8,7 +8,7 @@ import { toCommaDelimitedDollarWithCentsString, toCommaDelimitedString } from ".
 const plugBlockchain = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset metrics
-    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,blockchain_stats_24_hours,on_chain_data`);
+    const { data: crypto } = await makeHttpCall<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,blockchain_stats_24_hours,on_chain_data`);
 
     const bc24HourStats = new Table({
       title: `${crypto.name} Blockchain Data (USD - 24hr)`,

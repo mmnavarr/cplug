@@ -1,4 +1,4 @@
-import { useHttpClient } from "../utils/http_client";
+import { makeHttpCall } from "../utils/http_client";
 
 import { toCommaDelimitedDollarWithCentsString, toDecimalLetterString } from "../utils/format";
 import { CryptoCurrency } from "../@types/metrics";
@@ -11,7 +11,7 @@ const SATOSHI_BTC_HOLDINGS = 1100000;
 const plugSatoshi = async () => {
   try {
     // Map API call to get btc market data
-    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/btc/metrics/market-data`);
+    const { data: crypto } = await makeHttpCall<CryptoCurrency>(`v1/assets/btc/metrics/market-data`);
 
     console.log(figlet.textSync("Satoshi", { font: "Sub-Zero" }));
 

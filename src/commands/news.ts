@@ -1,4 +1,4 @@
-import { useHttpClient } from "../utils/http_client";
+import { makeHttpCall } from "../utils/http_client";
 import prompts, { Choice, PromptObject } from "prompts";
 import marked from "marked";
 import TerminalRenderer from "marked-terminal";
@@ -17,7 +17,7 @@ const plugNews = async (assetKey: string | boolean): Promise<void> => {
     const newsApiUrl: string = "v1/news" + (defaultNews ? "" : `/${assetKey}`) + "?page=1&as-markdown";
 
     // Map API call to get asset market data
-    const { data: newsArticles } = await useHttpClient<NewsArticles>(newsApiUrl);
+    const { data: newsArticles } = await makeHttpCall<NewsArticles>(newsApiUrl);
 
     // Console log markdown content of news via terminal renderer for clean syntax display
     const onSubmit = (_: PromptObject, answer: string) => console.log(marked(answer));

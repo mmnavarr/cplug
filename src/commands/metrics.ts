@@ -1,4 +1,4 @@
-import { useHttpClient } from "../utils/http_client";
+import { makeHttpCall } from "../utils/http_client";
 import { printTable } from "console-table-printer";
 
 import { CryptoCurrency } from "../@types/metrics";
@@ -8,7 +8,7 @@ import { toCommaDelimitedDollarWithCentsString, toPercentageString } from "../ut
 const plugMetrics = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset market data
-    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics`);
+    const { data: crypto } = await makeHttpCall<CryptoCurrency>(`v1/assets/${assetKey}/metrics`);
     // console.log("🚀 ~ file: metrics.ts ~ line 12 ~ plugMetrics ~ crypto", crypto)
 
     // Format crypto data display for table

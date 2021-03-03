@@ -1,4 +1,4 @@
-import { useHttpClient } from "../utils/http_client";
+import { makeHttpCall } from "../utils/http_client";
 import figures from "figures";
 import { Table } from "console-table-printer";
 
@@ -9,7 +9,7 @@ import { toCommaDelimitedString } from "../utils/format";
 const plugDevelopers = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset metrics
-    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,developer_activity`);
+    const { data: crypto } = await makeHttpCall<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,developer_activity`);
 
     const developerTable = new Table({
       title: `${crypto.name} GitHub Statistics`,

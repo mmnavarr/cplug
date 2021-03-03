@@ -1,4 +1,4 @@
-import { useHttpClient } from "../utils/http_client";
+import { makeHttpCall } from "../utils/http_client";
 import { Table } from "console-table-printer";
 
 import { CryptoCurrency } from "../@types/metrics";
@@ -9,7 +9,7 @@ import chalk from "chalk";
 const plugLending = async (assetKey: string): Promise<void> => {
   try {
     // Map API call to get asset metrics
-    const { data: crypto } = await useHttpClient<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,lend_rates,borrow_rates,loan_data`);
+    const { data: crypto } = await makeHttpCall<CryptoCurrency>(`v1/assets/${assetKey}/metrics?fields=id,symbol,name,lend_rates,borrow_rates,loan_data`);
 
     // Define lend rates table and iterate through response to populate table if applicable
     if (crypto.lend_rates !== null) {
